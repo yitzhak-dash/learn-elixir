@@ -5,8 +5,17 @@
 # If the second is zero, return “Buzz.”
 # Otherwise return the third argument. Do not use any language features that we haven’t yet covered in this book.
 
+func_1 = fn
+  (0, 0, _) -> "FizzBuzz"
+  (0, _, _) -> "Fizz"
+  (_, 0, _) -> "Buzz"
+  (_, _, x) -> x
+end
+
 # Exercise: Functions-3
 # The operator rem(a, b) returns the remainder after dividing a by b.
 # Write a function that takes a single integer (n) and calls the function in the previous exercise, passing it rem(n,3),
 # rem(n,5), and n. Call it seven times with the arguments 10, 11, 12, and so on.
 # You should get “Buzz, 11, Fizz, 13, 14, FizzBuzz, 16.”
+
+func_2 = fn (n) -> func_1.(rem(n, 3), rem(n, 5), n) end
