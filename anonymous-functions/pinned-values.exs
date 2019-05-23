@@ -9,5 +9,5 @@ end
 
 mr_bro = Greeter.for("Man", "Gerara here,")
 
-IO.puts(mr_bro.("Man"))
-IO.puts(mr_bro.("Woman"))
+IO.puts(mr_bro.("Man")) # => Gerara here, Man
+IO.puts(mr_bro.("Woman")) # => I don't know you

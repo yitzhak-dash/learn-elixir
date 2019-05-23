@@ -30,3 +30,10 @@ func_2 = fn (n) -> func_1.(rem(n, 3), rem(n, 5), n) end
 
 # Exercise: Functions-4
 prefix = fn first -> (fn second -> "#{first} #{second}"  end)  end
+
+# Exercise: Functions-5
+# Use the & notation to rewrite the following:
+# Enum.map [1,2,3,4], fn x -> x + 2 end
+# Enum.each [1,2,3,4], fn x -> IO.inspect x end
+Enum.map [1, 2, 3, 4], &(&1 + 2)
+Enum.each [1, 2, 3, 4], &(IO.inspect(&1))
