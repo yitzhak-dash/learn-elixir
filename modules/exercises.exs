@@ -6,6 +6,7 @@ defmodule Times do
     n * 3
   end
   def quadruple(n) do
-    double(n) + double(n)
+    double(double(n))
   end
 end
+
