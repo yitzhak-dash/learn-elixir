@@ -1,0 +1,55 @@
+---
+- hosts: dbservers
+  vars:
+    mariadb_packages:
+      - MariaDB
+      - MariaDB-server
+      - python-mysqldb
+  remote_user: yitzhakd
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: test connection
+      ping:
+    - name: Add repository key to the system
+      apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=0xF1656F24C74CD1D8
+    - name: Install MariaDB repository
+      apt_repository: repo='deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.globo.tech/repo/10.3/ubuntu bionic main'
+    - name: Install MariaDB Server
+      apt: name="{{ item }}" state=latest update_cache=yes
+      with_items:
+        - mariadb-server
+        - MySQL-python
+        - MariaDB
+
+    # root-password.yml
+    # This command will fail when the root password was set previously
+    - name: Check if root password is set
+      shell: >
+        mysqladmin -u root status
+      changed_when: false
+      failed_when: false
+      register: root_pwd_check
+      tags: mariadb
+    - name: Set MariaDB root password for the first time (root@localhost)
+      mysql_user:
+        name: root
+        password: TOOR
+        host: localhost
+        state: present
+      when: root_pwd_check.rc == 0
+      tags: mariadb
+
+    - name: Set MariaDB root password for 127.0.0.1, ::1
+      mysql_user:
+        name: root
+        password: TOOR
+        host: localhost
+        login_user: root
+        login_password: TOOR
+        state: present
+      with_items:
+        - ::1
+        - 127.0.0.1
+      when: root_pwd_check.rc == 0
+      tags: mariadb                                                                                                                                                                                                                                        22,7          All
