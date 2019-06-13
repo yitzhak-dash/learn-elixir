@@ -1,5 +1,5 @@
 defmodule Chop do
-  def middle(a, b), do: div(a + b, 2)
+  defp middle(a, b), do: div(a + b, 2)
 
   def guess(n, a..b) when n < b do
     candidate = middle(a, b)
