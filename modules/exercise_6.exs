@@ -1,21 +1,19 @@
 defmodule Chop do
+  def middle(a, b), do: div(a + b, 2)
 
-  def _guess(n, a..b) when n not in a..b do
-    ""
-  end
-
-  def _guess(n, n..b) do
-    IO.puts(n)
-  end
-
-  def _guess(n, a..b) when n in a..b do
-    guess(n, a..b)
-  end
-
-  def guess(n, a..b) do
-    candidate = a + div(b - a, 2)
+  def guess(n, a..b) when n < b do
+    candidate = middle(a, b)
     IO.puts("Is it #{candidate}")
-    _guess(n, a..(candidate - 1))
-    _guess(n, candidate..b)
+    guess(n, a..candidate)
+  end
+
+  def guess(n, _..b) when n > b do
+    candidate = b + middle(b, 2)
+    IO.puts("Is it #{candidate}")
+    guess(n, b..candidate)
+  end
+
+  def guess(n, _) do
+    IO.puts(n)
   end
 end
