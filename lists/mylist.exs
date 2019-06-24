@@ -10,4 +10,7 @@ defmodule MyList do
 
   def map([], _func), do: []
   def map([head | tail], func), do: [func.(head) | map(tail, func)]
+
+  def reduce([], val, _func), do: val
+  def reduce([head | tail], val, func), do: reduce(tail, func.(head, val), func)
 end
