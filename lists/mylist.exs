@@ -13,4 +13,8 @@ defmodule MyList do
 
   def reduce([], val, _func), do: val
   def reduce([head | tail], val, func), do: reduce(tail, func.(head, val), func)
+
+  def sum(list), do: sum(list, 0)
+  def sum([], val), do: val
+  def sum([head | tail], val), do: sum(tail, head + val)
 end
