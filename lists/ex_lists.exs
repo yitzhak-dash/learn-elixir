@@ -13,4 +13,11 @@ defmodule ExerciseList_1 do
   def caesar([], _n), do: []
   def caesar([head | tail], n) when (head + n) > 122, do: caesar([head - 26 | tail], n)
   def caesar([head | tail], n), do: [(head + n)] ++ caesar(tail, n)
+
+  #  exercise #4
+  def span(from, to) when from > to, do: []
+
+  def span(from, to) do
+    [from] ++ span(from + 1, to)
+  end
 end
