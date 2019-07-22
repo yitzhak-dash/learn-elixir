@@ -16,8 +16,13 @@ defmodule ExerciseList_1 do
 
   #  exercise #4
   def span(from, to) when from > to, do: []
+  def span(from, to), do: [from] ++ span(from + 1, to)
 
-  def span(from, to) do
-    [from] ++ span(from + 1, to)
-  end
+  def span_2(from, to) when from > to, do: []
+  def span_2(from, to), do: [from | span(from + 1, to)]
+
+  def span_3(from, to), do: _span_3(from, to, [])
+  def _span_3(from, to, list) when from > to, do: list
+  def _span_3(from, to, list), do: _span_3(from, to - 1, [to | list])
+
 end
