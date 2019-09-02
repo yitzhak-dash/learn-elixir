@@ -7,3 +7,4 @@ people = [
 ]
 
 IO.inspect(for person = %{height: height} <- people, height > 1.5, do: person)
+
