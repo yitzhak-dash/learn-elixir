@@ -2,7 +2,7 @@ defmodule CustomEnum do
   #  ex.5
 
   #all?
-  def all?([], func), do: true
+  def all?([], _), do: true
   def all?([head | tail], func) do
     if func.(head) do
       all?(tail, func)
@@ -12,7 +12,7 @@ defmodule CustomEnum do
   end
 
   # filter
-  def filter([], func?), do: []
+  def filter([], _), do: []
   def filter([head | tail], func) do
     if func.(head) do
       [head | filter(tail, func)]
