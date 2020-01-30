@@ -20,4 +20,21 @@ defmodule CustomEnum do
       filter(tail, func)
     end
   end
+
+
+  # split
+  # Splits the enumerable into two enumerables, leaving count elements in the first one.
+  def split([], _), do: {[], []}
+  def split([head | tail], count) do
+    split({[head], tail}, count)
+  end
+
+  def split({list, [c | d]}, count) do
+    if (length(list)) == count do
+      {list, [c | d]}
+    else
+      split({list ++ [c], d}, count)
+    end
+  end
+
 end
