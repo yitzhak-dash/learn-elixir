@@ -30,11 +30,11 @@ defmodule CustomEnum do
     split({[head], tail}, count)
   end
 
-  def split({list, [c | d]}, count) do
+  def split({list, [head | tail]}, count) do
     if (length(list)) == count do
-      {list, [c | d]}
+      {list, [head | tail]}
     else
-      split({list ++ [c], d}, count)
+      split({list ++ [head], tail}, count)
     end
   end
 
