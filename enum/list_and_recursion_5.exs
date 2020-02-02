@@ -23,6 +23,7 @@ defmodule CustomEnum do
 
 
   # split
+  #  TODO: support negative count(starts counting from the back of the enumerable)
   # Splits the enumerable into two enumerables, leaving count elements in the first one.
   def split([], _), do: {[], []}
   def split([head | tail], count) do
@@ -34,6 +35,18 @@ defmodule CustomEnum do
       {list, [c | d]}
     else
       split({list ++ [c], d}, count)
+    end
+  end
+
+  # take
+  # TODO: support negative amount(the amount of last values will be taken)
+  # Takes the first amount items from the enumerable.
+  def take([], _), do: []
+  def take([head | tail], amount) do
+    if amount == 0 do
+      []
+    else
+      [head] ++ take(tail, amount - 1)
     end
   end
 
